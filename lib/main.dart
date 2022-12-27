@@ -6,16 +6,19 @@ import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   FlutterError.demangleStackTrace = (StackTrace stack) {
     if (stack is stack_trace.Trace) return stack.vmTrace;
     if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
     return stack;
   };
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  // final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
 
 
@@ -23,10 +26,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Divisibility Calculator',
-      home: const Homepage(title: 'Divisibility Calculator'),
+      title: 'Dělitelnost',
+      home: const Homepage(title: 'Dělitelnost'),
+
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(fontFamily: 'Lato'),
     );
   }
 }

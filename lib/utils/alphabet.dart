@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 class Alphabet {
   static List<String> generate(length, maxLength) {
     int start = 65;
@@ -43,4 +45,53 @@ class Alphabet {
     }
     return alphabet;
   }
+
+  static String toSuperscript(String number) {
+    String s = "";
+
+    for (var element in number.characters) {
+      s += superscripts[int.parse(element)];
+    }
+    return s;
+  }
+
+  static String toSubscript(String number) {
+    String s = "";
+
+    for (var element in number.characters) {
+      s += subscripts[int.parse(element)];
+    }
+    return s;
+  }
+
+  static final superscripts = [
+    '\u2070',
+    '\u00B9',
+    '\u00B2',
+    '\u00B3',
+    '⁴',
+    '⁵',
+    '⁶',
+    '⁷',
+    '⁸',
+    '⁹',
+  ];
+
+
+  static final subscripts = [
+    '₀',
+    '₁',
+    '₂',
+    '₃',
+    '₄',
+    '₅',
+    '₆',
+    '₇',
+    '₈',
+    '₉',
+  ];
+
+
+
+
 }

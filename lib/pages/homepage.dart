@@ -1,7 +1,9 @@
-import 'package:divisibility_calculator/pages/divisibilityCheck.dart';
+import 'package:divisibility_calculator/pages/manual.dart';
 import 'package:divisibility_calculator/pages/divisibilityCalculator/divisibilityEquationGenerator.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key, required this.title}) : super(key: key);
@@ -15,6 +17,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   PageController page = PageController();
   late List<SideMenuItem> _items;
+  final Uri _url = Uri.parse("https://github.com/Papajik");
 
   @override
   void initState() {
@@ -22,19 +25,20 @@ class _HomepageState extends State<Homepage> {
       SideMenuItem(
         // Priority of item to show on SideMenu, lower value is displayed at the top
         priority: 0,
-        title: 'Generátor vzorce',
+        title: 'Vysvětlivky',
         onTap: () {
           page.jumpToPage(0);
         },
         icon: const Icon(Icons.home),
       ),
       SideMenuItem(
+        // Priority of item to show on SideMenu, lower value is displayed at the top
         priority: 1,
-        title: 'Ověření dělitelnosti',
+        title: 'Dělitelnost',
         onTap: () {
           page.jumpToPage(1);
         },
-        icon: const Icon(Icons.settings),
+        icon: const Icon(Icons.calculate),
       ),
     ];
     super.initState();
@@ -53,10 +57,13 @@ class _HomepageState extends State<Homepage> {
           SideMenu(
             style: _style,
             controller: page,
-            title: const SizedBox(
-                height: 40, child: Center(child: Text('Test dělitelnosti'))),
-            footer: const SizedBox(
-                height: 40, child: Center(child: Text('Papajik'))),
+            // title: const SizedBox(
+            //     height: 40, child: Center(child: Text('Test dělitelnosti'))),
+            footer: SizedBox(
+                height: 40, child: Center(child: InkWell(
+                child: const Text('Papajik'),
+                onTap: () => _launchUrl
+            ))),
             onDisplayModeChanged: (mode) {
               print(mode);
             },
@@ -66,14 +73,20 @@ class _HomepageState extends State<Homepage> {
             child: PageView(
               controller: page,
               children: const [
+                ManualScreen(),
                 DivisibilityEquationGeneratorScreen(),
-                DivisibilityCheckScreen(),
               ],
             ),
           )
         ],
       ),
     );
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $_url';
+    }
   }
 
   final _style = SideMenuStyle(
@@ -86,7 +99,7 @@ class _HomepageState extends State<Homepage> {
       selectedColor: Colors.lightBlue,
       selectedIconColor: Colors.white,
       unselectedIconColor: Colors.black54,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey.shade300,
       selectedTitleTextStyle: const TextStyle(color: Colors.white),
       unselectedTitleTextStyle: const TextStyle(color: Colors.black54),
       iconSize: 20,
