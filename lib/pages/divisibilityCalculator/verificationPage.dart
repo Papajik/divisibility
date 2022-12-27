@@ -62,62 +62,56 @@ class _VerificationPageState extends ConsumerState<VerificationPage> {
               if (widget.divisionModel.system != 10)
                 FormulaCard(
                   children: [
-                    SizedBox(
-                      width: 150,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            labelText:
-                                "Ověření výsledku pro (${Alphabet.toSubscript("10")}): "),
-                        controller: verificationBaseController,
-                        onChanged: (value) {
-                          if (value == "") {
-                            value = "1";
-                          }
-                          verificationController.text = Number.decimalToBase(
-                              int.parse(value), widget.divisionModel.system);
-                          ref.read(verificationModelProvider.notifier).verify(
-                              widget.divisionModel.remainders.reversed.toList(),
-                              verificationController.text,
-                              widget.divisionModel.divider,
-                              widget.divisionModel.system);
-                        },
-                        // keyboardType:
-                        //     const TextInputType.numberWithOptions(decimal: true),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp("[0-9a-zA-Z]")),
-                        ],
-                      ),
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText:
+                              "Ověření výsledku pro (${Alphabet.toSubscript("10")}): "),
+                      controller: verificationBaseController,
+                      onChanged: (value) {
+                        if (value == "") {
+                          value = "1";
+                        }
+                        verificationController.text = Number.decimalToBase(
+                            int.parse(value), widget.divisionModel.system);
+                        ref.read(verificationModelProvider.notifier).verify(
+                            widget.divisionModel.remainders.reversed.toList(),
+                            verificationController.text,
+                            widget.divisionModel.divider,
+                            widget.divisionModel.system);
+                      },
+                      // keyboardType:
+                      //     const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp("[0-9a-zA-Z]")),
+                      ],
                     )
                   ],
                 ),
               FormulaCard(
                 children: [
-                  SizedBox(
-                    width: 150,
-                    child: TextField(
-                      decoration: InputDecoration(
-                          labelText:
-                              "Ověření výsledku pro (${Alphabet.toSubscript(widget.divisionModel.system.toString())}): "),
-                      controller: verificationController,
-                      onChanged: (value) {
-                        if (value == "") {
-                          value = "1";
-                        }
+                  TextField(
+                    decoration: InputDecoration(
+                        labelText:
+                            "Ověření výsledku pro (${Alphabet.toSubscript(widget.divisionModel.system.toString())}): "),
+                    controller: verificationController,
+                    onChanged: (value) {
+                      if (value == "") {
+                        value = "1";
+                      }
 
-                        verificationBaseController.text = Number.baseToDecimal(
-                            value, widget.divisionModel.system);
-                        ref.read(verificationModelProvider.notifier).verify(
-                            widget.divisionModel.remainders.reversed.toList(),
-                            value,
-                            widget.divisionModel.divider,
-                            widget.divisionModel.system);
-                      },
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp("[0-9a-zA-Z]")),
-                      ],
-                    ),
+                      verificationBaseController.text = Number.baseToDecimal(
+                          value, widget.divisionModel.system);
+                      ref.read(verificationModelProvider.notifier).verify(
+                          widget.divisionModel.remainders.reversed.toList(),
+                          value,
+                          widget.divisionModel.divider,
+                          widget.divisionModel.system);
+                    },
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp("[0-9a-zA-Z]")),
+                    ],
                   )
                 ],
               ),

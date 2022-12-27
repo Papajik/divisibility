@@ -1,8 +1,8 @@
 import 'package:divisibility_calculator/models/basic_formula.dart';
 import 'package:divisibility_calculator/models/division_formula.dart';
 import 'package:divisibility_calculator/models/division_model.dart';
-import 'package:divisibility_calculator/models/network_graph.dart';
-import 'package:divisibility_calculator/pages/divisibilityCalculator/calulactionPage.dart';
+import 'package:divisibility_calculator/pages/divisibilityCalculator/calculationPage.dart';
+import 'package:divisibility_calculator/pages/divisibilityCalculator/graphPage.dart';
 import 'package:divisibility_calculator/pages/divisibilityCalculator/verificationPage.dart';
 import 'package:divisibility_calculator/widgets/formula_card.dart';
 import 'package:flutter/material.dart';
@@ -20,17 +20,13 @@ class DivisibilityEquationGeneratorScreen extends ConsumerStatefulWidget {
 class _DivisibilityEquationGeneratorScreenState
     extends ConsumerState<DivisibilityEquationGeneratorScreen> {
   static const DEFAULT_BASE = 10;
-  static const DEFAULT_DIVIDER = 3;
+  static const DEFAULT_DIVIDER = 7;
 
   final divisionModelProvider =
       StateNotifierProvider<DivisionModelNotifier, DivisionModel>((ref) {
     return DivisionModelNotifier(DEFAULT_BASE, DEFAULT_DIVIDER);
   });
 
-  final networkGraphModelProvider =
-      StateNotifierProvider<NetworkGraphModel, Map<String, String>>(
-    (ref) => NetworkGraphModel([]),
-  );
 
   final basicFormulaModelProvider =
       StateNotifierProvider<BasicFormulaModel, String>(
@@ -162,20 +158,21 @@ class _DivisibilityEquationGeneratorScreenState
                   child: const Text('Zobrazit výpočet'),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              CalculationPage(divisionModel: divisionModel)),
-                    );
-                  },
-                  child: const Text('Grafické znázornění'),
+              if (divisionModel.divider < 25)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                NetworkGraphPage(divisionModel: divisionModel)),
+                      );
+                    },
+                    child: const Text('Grafické znázornění'),
+                  ),
                 ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
@@ -194,10 +191,6 @@ class _DivisibilityEquationGeneratorScreenState
                 ),
               ),
             ]
-
-            // SizedBox(height: 400, child: CustomPaint(
-            //   painter:NetworkGraphPainter(ref.watch(networkGraphModelProvider)),
-            // ))
           ],
         ),
       ),

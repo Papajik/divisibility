@@ -1,11 +1,12 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+class NetworkGraphModel {
+  late final Map<String, String> networkMap;
 
-
-class NetworkGraphModel extends StateNotifier<Map<String, String>> {
-  NetworkGraphModel(List<int> remainders) : super(generateMap(remainders));
+  NetworkGraphModel(List<int> remainders) {
+    networkMap = generateMap(remainders);
+  }
 
   void generate(List<int> list){
-    state = generateMap(list);
+    networkMap = generateMap(list);
   }
 
   static generateMap(List<int> list) {
