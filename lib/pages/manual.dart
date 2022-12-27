@@ -79,13 +79,33 @@ class _ManualScreenState extends State<ManualScreen> {
             Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Text(
+                  "Pro zadané hodnoty systému a dělitele lze pak ověřovat dělitelnost jakéhokoliv čísla. "
+                      "Dělitelnost je ověřována pomocí získané rovnice."),
+            ),
+          ],
+        ),
+        FormulaCard(
+          children: [
+            Text('Grafické znázornění cyklu'),
+            Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Text(
                   "Při děliteli menším než 25 je možné zobrazit grafické znázornění cyklu"),
             ),
             Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Text(
-                  "Pro zadané hodnoty systému a dělitele lze pak ověřovat dělitelnost jakéhokoliv čísla. "
-                      "Dělitelnost je ověřována pomocí získané rovnice."),
+                  "Modře jsou označeny zbytky, které je možné při dělení získat"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Text(
+                  "Šedou jsou označeny zbytky, které není možné získat"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Text(
+                  "Zeleně je označen zbytek, ve kterém došlo k zacyklení"),
             ),
           ],
         )
