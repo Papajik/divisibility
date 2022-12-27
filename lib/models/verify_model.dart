@@ -22,7 +22,6 @@ class VerificationModel extends StateNotifier<List<String>> {
       return ["Neplatný výsledek"];
     }
 
-    print("Remainders = $remainders");
 
     if (remainders.last == 0) {
       remainders.removeLast();
@@ -65,15 +64,5 @@ class VerificationModel extends StateNotifier<List<String>> {
       "$sum % $divider = ${sum % divider}",
       sum % divider == 0 ? "Číslo je dělitelné" : "Číslo není dělitelné"
     ];
-
-    // alphabet.reversed.toList().asMap().forEach((key, value) {
-    //   r +=
-    //       "$value*$base${Alphabet.toSuperscript(Number.decimalToBase(alphabet.length - key - 1, base))}";
-    //   if (key < alphabet.length - 1) {
-    //     r += " + ";
-    //   }
-    // });
-    //
-    // return r;
   }
 }

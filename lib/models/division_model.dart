@@ -22,8 +22,6 @@ class DivisionModel {
   late final List<String> calculations;
 
   DivisionModel({required this.system, required this.divider}) {
-    // print(divider);
-    // print(system);
     dividerInBase =
         "(${Number.decimalToBase(divider, system)}${Alphabet.toSubscript(system.toString())})";
     process(system, divider);

@@ -12,7 +12,6 @@ class DivisionFormulaModel extends StateNotifier<String> {
   String get formula => state;
 
   static String generateFormula(List<int> remainders, int base) {
-    print(remainders);
 
     if (remainders.length > 200) {
       return "Rovnice je příliš dlouhá";
