@@ -49,6 +49,7 @@ class _DivisibilityEquationGeneratorScreenState
         text: ref.read(divisionModelProvider).divider.toString());
     numberSystemController = TextEditingController(
         text: ref.read(divisionModelProvider).system.toString());
+
   }
 
   @override
@@ -136,13 +137,13 @@ class _DivisibilityEquationGeneratorScreenState
 
             if (ref.read(basicFormulaModelProvider.notifier).formula != "")
               FormulaCard(children: [
-                const Text("Základní rovnice"),
+                const Text("Obecná rovnice"),
                 Text(ref.watch(basicFormulaModelProvider)),
               ]),
 
             if (ref.read(divisionFormulaModelProvider.notifier).formula != "")
               FormulaCard(children: [
-                const Text("Výsledná rovnice"),
+                const Text("Výsledná rovnice pro ověření dělitelnosti"),
                 Text(ref.watch(divisionFormulaModelProvider))
               ]),
 
@@ -170,7 +171,7 @@ class _DivisibilityEquationGeneratorScreenState
                                 NetworkGraphPage(divisionModel: divisionModel)),
                       );
                     },
-                    child: const Text('Grafické znázornění'),
+                    child: const Text('Grafické znázornění cyklu'),
                   ),
                 ),
               Padding(
