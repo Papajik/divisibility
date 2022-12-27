@@ -7,6 +7,7 @@ class NetworkGraphPainter extends CustomPainter {
   final int maxRemainder;
   final Paint unusedNode = Paint()..color = Colors.grey;
   final Paint usedNode = Paint()..color = Colors.blue.shade300;
+  final Paint loopNode = Paint()..color = Colors.greenAccent.shade100;
   final Paint line = Paint()
     ..color = Colors.red
     ..style = PaintingStyle.stroke
@@ -28,12 +29,11 @@ class NetworkGraphPainter extends CustomPainter {
     var index = 0;
 
     /// Vykreslení linky mezi uzly
-    for (int i = 0; i<maxRemainder;i++){
+    for (int i = 0; i < maxRemainder; i++) {
       if (map.containsKey(i.toString())) {
         paintLine(canvas, step, i, centerX, nodePositionRadius);
       }
     }
-
 
     for (double i = 0; i < 360; i += step) {
       /// Pozice uzlu
@@ -94,12 +94,15 @@ class NetworkGraphPainter extends CustomPainter {
   }
 
   void paintNode(Canvas canvas, Offset offset, double nodeRadius, int index) {
-    canvas.drawCircle(
-        offset,
-        nodeRadius,
+    var paint =
         map.containsKey(index.toString()) || map.containsValue(index.toString())
             ? usedNode
-            : unusedNode);
+            : unusedNode;
+    if (map[index.toString()] == index.toString()) {
+      paint = loopNode;
+    }
+
+    canvas.drawCircle(offset, nodeRadius, paint);
   }
 
   @override
