@@ -31,10 +31,12 @@ class Number {
         .reversed
         .toList();
 
+
     int n = 0;
 
     for (var i = 0; i < numList.length; i++) {
-      n += parseNumber(numList[i]) * pow(originalSystem, i).toInt();
+      n += (int.tryParse(numList[i]) ?? parseNumber(numList[i])) * pow(originalSystem, i).toInt();
+
     }
     return n.toString();
   }
