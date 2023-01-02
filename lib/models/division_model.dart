@@ -66,10 +66,10 @@ class DivisionModel {
     List<String> lines = [];
 
     lines.add(
-        "${pow(system, 0)} ${alphabet[0]} =>${remainders[0]} ${alphabet[0]}");
+        "${pow(system, 0)} ${alphabet[0]} ≡ ${remainders[0]} ${alphabet[0]} (mod $divider)");
     for (int i = 1; i < remainders.length; i++) {
       lines.add(
-          "${remainders[i - 1] * system}${Alphabet.toSubscript("10")} ${alphabet[i]} => ${remainders[i]}${Alphabet.toSubscript("10")} ${alphabet[i]}");
+          "${remainders[i - 1] * system}${Alphabet.toSubscript("10")} ${alphabet[i]} ≡ ${remainders[i]}${Alphabet.toSubscript("10")} ${alphabet[i]} (mod $divider)");
 
       if (remainders[i] == 0) {
         lines.add(_tailZero(divider, i));

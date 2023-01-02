@@ -13,9 +13,13 @@ class NetworkGraphPainter extends CustomPainter {
     ..style = PaintingStyle.stroke
     ..strokeWidth = 5.0;
 
+  final Paint firstLine = Paint()
+    ..color = Colors.orange
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 5.0;
+
   @override
   void paint(Canvas canvas, Size size) {
-    print(map);
     var centerX = size.width / 2;
     var centerY = size.height / 2;
 
@@ -72,7 +76,7 @@ class NetworkGraphPainter extends CustomPainter {
     var path = Path();
     path.moveTo(offsetFrom.dx, offsetFrom.dy);
     path.lineTo(offsetTo.dx, offsetTo.dy);
-    canvas.drawPath(path, line);
+    canvas.drawPath(path, index == 1 ? firstLine : line);
   }
 
   void paintNodeName(int index, Size size, Canvas canvas, Offset offset) {
